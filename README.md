@@ -463,6 +463,7 @@ The system was tested at several levels:
   <img src="screenshots/published.png" width="23%">
   <img src="screenshots/Dashboard.png" width="23%">
   <img src="screenshots/subscription.png" width="23%">
+  <img src="screenshots/overview.png" width="23%">
 </p>
 
 ## Troubleshooting
