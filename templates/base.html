@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MediSync</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">M</div>
+
+            <div>
+                <h2>MediSync</h2>
+                <span>Healthcare Platform</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <a href="/" class="nav-item">
+                <span>▦</span>
+                Dashboard
+            </a>
+
+            <a href="/patients-page" class="nav-item">
+                <span>♙</span>
+                Patients
+            </a>
+
+            <a href="/doctors-page" class="nav-item">
+                <span>⚕</span>
+                Doctors
+            </a>
+
+            <a href="/appointments-page" class="nav-item">
+                <span>▣</span>
+                Appointments
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="api-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>API Online</strong>
+                    <small>localhost:5000</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <h1>{% block page_title %}Dashboard{% endblock %}</h1>
+
+                <p>
+                    {% block page_subtitle %}
+                    Healthcare appointment management
+                    {% endblock %}
+                </p>
+            </div>
+
+            <div class="profile">
+
+                <div class="profile-avatar">
+                    MS
+                </div>
+
+                <div>
+                    <strong>Medical Staff</strong>
+                    <small>Administrator</small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="content">
+
+            {% block content %}{% endblock %}
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

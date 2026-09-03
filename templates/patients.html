@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Patients
+{% endblock %}
+
+{% block page_subtitle %}
+Manage registered patients.
+{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+<h2>Add New Patient</h2>
+
+<form action="/add-patient" method="POST">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Name</label>
+
+<input
+    type="text"
+    name="name"
+    placeholder="Patient name"
+    required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Age</label>
+
+<input
+    type="number"
+    name="age"
+    placeholder="Age"
+    min="1"
+    required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input
+    type="email"
+    name="email"
+    placeholder="patient@example.com"
+    required>
+
+</div>
+
+</div>
+
+<button class="button" type="submit">
+    Add Patient
+</button>
+
+</form>
+
+</div>
+
+
+<div class="section-header">
+
+<div>
+<h2>Patient Directory</h2>
+<p>Registered patients in MediSync</p>
+</div>
+
+</div>
+
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Email</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for patient in patients %}
+
+<tr>
+
+<td>#{{ patient.id }}</td>
+
+<td>
+<strong>{{ patient.name }}</strong>
+</td>
+
+<td>
+{{ patient.age }}
+</td>
+
+<td>
+{{ patient.email }}
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="4" class="empty">
+No patients registered yet.
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+services:
+
+  postgres:
+
+    image: postgres:16
+
+    container_name: medisync-postgres
+
+    environment:
+      POSTGRES_DB: medisync
+      POSTGRES_USER: medisync_user
+      POSTGRES_PASSWORD: medisync_password
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U medisync_user -d medisync"
+        ]
+
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+
+  medisync-api:
+
+    build:
+      context: .
+
+      dockerfile: backend/Dockerfile
+
+    container_name: medisync-api
+
+    ports:
+      - "5000:5000"
+
+    environment:
+
+      DATABASE_URL: postgresql://medisync_user:medisync_password@postgres:5432/medisync
+
+    depends_on:
+
+      postgres:
+        condition: service_healthy
+
+
+volumes:
+
+  postgres_data:

@@ -1,0 +1,75 @@
+# ================================
+# Python
+# ================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# ================================
+# Environment / Secrets
+# ================================
+.env
+.env.*
+!.env.example
+
+# API keys / credentials
+secrets/
+*.pem
+*.key
+
+# ================================
+# Flask / Local Database
+# ================================
+*.db
+*.sqlite
+*.sqlite3
+instance/
+
+# ================================
+# Testing / Coverage
+# ================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# ================================
+# Build / Packaging
+
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ================================
+# IDE
+# ================================
+.vscode/
+.idea/
+
+# ================================
+# OS Files
+# ================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ================================
+# Logs
+# ================================
+*.log
+
+# ================================
+# Temporary files
+# ================================
+*.tmp
+*.temp
+

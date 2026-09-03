@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Appointments
+{% endblock %}
+
+{% block page_subtitle %}
+Schedule and manage patient appointments.
+{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+<h2>Book Appointment</h2>
+
+<form action="/add-appointment" method="POST">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Patient</label>
+
+<select name="patient_id" required>
+
+<option value="">
+Select patient
+</option>
+
+{% for patient in patients %}
+
+<option value="{{ patient.id }}">
+
+{{ patient.name }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Doctor</label>
+
+<select name="doctor_id" required>
+
+<option value="">
+Select doctor
+</option>
+
+{% for doctor in doctors %}
+
+<option value="{{ doctor.id }}">
+
+{{ doctor.name }} —
+{{ doctor.specialization }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Date</label>
+
+<input
+    type="date"
+    name="date"
+    required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Time</label>
+
+<input
+    type="time"
+    name="time"
+    required>
+
+</div>
+
+</div>
+
+<button class="button" type="submit">
+
+Book Appointment
+
+</button>
+
+</form>
+
+</div>
+
+
+<div class="section-header">
+
+<div>
+
+<h2>Appointment Schedule</h2>
+
+<p>
+Manage upcoming appointments
+</p>
+
+</div>
+
+</div>
+
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Patient</th>
+<th>Doctor</th>
+<th>Date</th>
+<th>Time</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for appointment in appointments %}
+
+<tr>
+
+<td>
+
+<strong>
+{{ appointment.patient }}
+</strong>
+
+</td>
+
+<td>
+
+{{ appointment.doctor }}
+
+</td>
+
+<td>
+
+{{ appointment.date }}
+
+</td>
+
+<td>
+
+{{ appointment.time }}
+
+</td>
+
+<td>
+
+<span class="badge
+{% if appointment.status == 'cancelled' %}
+badge-cancelled
+{% else %}
+badge-success
+{% endif %}
+">
+
+{{ appointment.status }}
+
+</span>
+
+</td>
+
+<td>
+
+{% if appointment.status != 'cancelled' %}
+
+<form
+    action="/cancel-appointment/{{ appointment.id }}"
+    method="POST">
+
+<button
+    type="submit"
+    class="cancel-button">
+
+Cancel
+
+</button>
+
+</form>
+
+{% else %}
+
+<span class="muted">
+Cancelled
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="6" class="empty">
+
+No appointments available.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

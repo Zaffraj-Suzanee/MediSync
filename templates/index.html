@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Dashboard
+{% endblock %}
+
+{% block page_subtitle %}
+Welcome back. Here's what's happening today.
+{% endblock %}
+
+{% block content %}
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon patients-icon">
+            ♙
+        </div>
+
+        <div>
+            <p>Total Patients</p>
+            <h2>{{ patient_count }}</h2>
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon doctors-icon">
+            ⚕
+        </div>
+
+        <div>
+            <p>Total Doctors</p>
+            <h2>{{ doctor_count }}</h2>
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon appointments-icon">
+            ▣
+        </div>
+
+        <div>
+            <p>Appointments</p>
+            <h2>{{ appointment_count }}</h2>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="section-header">
+
+    <div>
+        <h2>Recent Appointments</h2>
+        <p>Latest scheduled appointments</p>
+    </div>
+
+    <a href="/appointments-page"
+       class="button">
+        + New Appointment
+    </a>
+
+</div>
+
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+    <th>Patient</th>
+    <th>Doctor</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Status</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for appointment in appointments %}
+
+<tr>
+
+<td>
+    <strong>{{ appointment.patient }}</strong>
+</td>
+
+<td>
+    {{ appointment.doctor }}
+</td>
+
+<td>
+    {{ appointment.date }}
+</td>
+
+<td>
+    {{ appointment.time }}
+</td>
+
+<td>
+
+<span class="badge
+{% if appointment.status == 'cancelled' %}
+badge-cancelled
+{% else %}
+badge-success
+{% endif %}
+">
+
+{{ appointment.status }}
+
+</span>
+
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="5" class="empty">
+
+No appointments available.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

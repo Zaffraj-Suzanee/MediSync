@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Doctors
+{% endblock %}
+
+{% block page_subtitle %}
+Manage healthcare professionals.
+{% endblock %}
+
+{% block content %}
+
+<div class="form-card">
+
+<h2>Add New Doctor</h2>
+
+<form action="/add-doctor" method="POST">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Doctor Name</label>
+
+<input
+    type="text"
+    name="name"
+    placeholder="Dr. Sarah Fernando"
+    required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Specialization</label>
+
+<input
+    type="text"
+    name="specialization"
+    placeholder="Cardiology"
+    required>
+
+</div>
+
+</div>
+
+<button class="button" type="submit">
+    Add Doctor
+</button>
+
+</form>
+
+</div>
+
+
+<div class="section-header">
+
+<div>
+
+<h2>Doctor Directory</h2>
+
+<p>
+Available healthcare professionals
+</p>
+
+</div>
+
+</div>
+
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Doctor</th>
+<th>Specialization</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for doctor in doctors %}
+
+<tr>
+
+<td>
+#{{ doctor.id }}
+</td>
+
+<td>
+
+<strong>
+{{ doctor.name }}
+</strong>
+
+</td>
+
+<td>
+
+<span class="specialization">
+
+{{ doctor.specialization }}
+
+</span>
+
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="3" class="empty">
+
+No doctors registered yet.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
