@@ -10,6 +10,10 @@
 
     <title>MediSync</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 
@@ -30,25 +34,58 @@
             </div>
         </div>
 
+        <div class="pulse-divider">
+            <svg viewBox="0 0 240 32" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="pulse-line" d="M0,16 L60,16 L72,16 L80,4 L90,28 L100,16 L112,16 L240,16"
+                      fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
         <nav>
 
             <a href="/" class="nav-item">
-                <span>▦</span>
+                <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="8" height="8" rx="2"/>
+                        <rect x="13" y="3" width="8" height="5" rx="2"/>
+                        <rect x="13" y="10" width="8" height="11" rx="2"/>
+                        <rect x="3" y="13" width="8" height="8" rx="2"/>
+                    </svg>
+                </span>
                 Dashboard
             </a>
 
             <a href="/patients-page" class="nav-item">
-                <span>♙</span>
+                <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="8" r="3.4"/>
+                        <path d="M4.5 20c0-4.2 3.4-6.8 7.5-6.8s7.5 2.6 7.5 6.8"/>
+                    </svg>
+                </span>
                 Patients
             </a>
 
             <a href="/doctors-page" class="nav-item">
-                <span>⚕</span>
+                <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 3v3a3 3 0 0 0 6 0V3"/>
+                        <path d="M6 3v5a6 6 0 0 0 12 0V3"/>
+                        <path d="M12 15v3"/>
+                        <circle cx="12" cy="20.5" r="1.8"/>
+                    </svg>
+                </span>
                 Doctors
             </a>
 
             <a href="/appointments-page" class="nav-item">
-                <span>▣</span>
+                <span class="nav-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3.5" y="4.5" width="17" height="16" rx="2.5"/>
+                        <path d="M3.5 9.5h17"/>
+                        <path d="M8 2.5v4M16 2.5v4"/>
+                        <path d="M7.5 13.5h3M7.5 17h6"/>
+                    </svg>
+                </span>
                 Appointments
             </a>
 

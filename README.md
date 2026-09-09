@@ -260,7 +260,7 @@ Docker Compose manages the backend and PostgreSQL services.
 ### Clone Repository
 
 ~~~bash
-git clone https://github.com/YOUR_USERNAME/medisync.git
+git clone https://github.com/Zaffraj-Suzanee/medisync.git
 cd medisync
 ~~~
 
@@ -304,21 +304,21 @@ docker compose down
 
 ## API Management
 
-The MediSync API is managed through **WSO2 API Manager**.
+The MediSync API is managed through WSO2 API Manager, which provides the API Gateway, security, subscription management, access control, rate limiting, and API lifecycle management.
 
-WSO2 is used as the API management layer rather than as the core backend framework.
+WSO2 is used as the API management layer while the core application remains a Flask-based REST backend.
 
-The API management configuration includes:
+### WSO2 API Management Features
 
-- API creation.
-- OpenAPI definition.
-- API publishing.
-- API deployment.
-- API revision management.
-- API Gateway routing.
-- OAuth2 authentication.
-- Application subscription.
-- API Console testing.
+- API creation and OpenAPI definition
+- API publishing and lifecycle management
+- API revisions and deployment
+- API Gateway routing
+- OAuth2 authentication
+- Application subscriptions
+- Operation-level API scopes
+- Rate limiting
+- API Console testing
 
 ### WSO2 API Configuration
 
@@ -328,11 +328,53 @@ The API management configuration includes:
 | Version | 1.0.0 |
 | Context | `/medisync` |
 | Lifecycle | PUBLISHED |
-| Revision | Revision 2 |
+| Rate Limiting | 10KperMin |
 | Security | OAuth2 |
 | Subscription | Unlimited |
 | Application | DefaultApplication |
 | Application Status | UNBLOCKED |
+| Operation scope | appointments:delete |
+
+#### Operation-Level Scope
+
+The appointments:delete scope is configured for the:
+```bash
+DELETE /appointments/{id}
+```
+operation.
+
+This provides fine-grained access control for appointment deletion.
+
+#### Rate Limiting
+
+The 10KPerMin rate-limiting policy is configured for the:
+```bash
+DELETE /appointments/{id}
+```
+operation.
+
+This controls the number of requests allowed within the configured time period and helps protect the backend from excessive API traffic.
+
+#### API Gateway
+
+Requests are routed through the WSO2 API Gateway before reaching the Flask backend:
+
+API Consumer
+     |
+     | HTTPS + OAuth2
+     v
+WSO2 API Gateway
+     |
+     | Scope / Rate Limiting / Routing
+     v
+Flask REST API
+     |
+     v
+PostgreSQL
+
+#### API Revision
+
+API configuration changes are deployed using WSO2 API revisions. The API remains publicly available as version 1.0.0 while revisions are used to manage configuration changes and deployments.
 
 #### Gateway
 
@@ -436,26 +478,6 @@ The system was tested at several levels:
 - OpenAPI validation.
 - Positive API testing.
 - Negative API testing.
-
-### Testing Summary
-
-| Test | Result |
-|---|---|
-| Backend Health | Passed |
-| GET Patients | Passed |
-| POST Patient | Passed |
-| GET Doctors | Passed |
-| POST Doctor | Passed |
-| GET Appointments | Passed |
-| POST Appointment | Passed |
-| DELETE Appointment | Passed |
-| OAuth2 Authentication | Passed |
-| API Gateway | Passed |
-| Application Subscription | Passed |
-| OpenAPI Request Body | Passed |
-| Duplicate Validation | Passed |
-| Invalid ID Validation | Passed |
-
 
 ## Screenshots
 
