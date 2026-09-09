@@ -359,6 +359,7 @@ This controls the number of requests allowed within the configured time period a
 
 Requests are routed through the WSO2 API Gateway before reaching the Flask backend:
 
+```text
 API Consumer
      |
      | HTTPS + OAuth2
@@ -371,6 +372,7 @@ Flask REST API
      |
      v
 PostgreSQL
+```
 
 #### API Revision
 
